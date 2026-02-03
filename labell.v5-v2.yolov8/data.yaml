@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['needle']
+
+roboflow:
+  workspace: hey-crpq7
+  project: labell-zli58
+  version: 5
+  license: MIT
+  url: https://universe.roboflow.com/hey-crpq7/labell-zli58/dataset/5

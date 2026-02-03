@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['needle']
+
+roboflow:
+  workspace: amecproject
+  project: pressure-gauges
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/amecproject/pressure-gauges/dataset/2

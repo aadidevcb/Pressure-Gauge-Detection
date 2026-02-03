@@ -1,0 +1,8 @@
+.venv/
+runs/
+*.pt
+train/
+val/
+test/
+__pycache__/
+.DS_Store
