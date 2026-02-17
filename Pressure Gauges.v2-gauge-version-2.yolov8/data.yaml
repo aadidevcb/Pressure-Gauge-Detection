@@ -1,6 +1,8 @@
-train: ../train/images
-val: ../valid/images
-test: ../test/images
+# Update these paths to the absolute location on your Mac
+path: /Users/aadidev/CODE/model/Pressure Gauges.v2-gauge-version-2.yolov8
+train: train/images
+val: valid/images
+test: test/images
 
 nc: 1
 names: ['needle']

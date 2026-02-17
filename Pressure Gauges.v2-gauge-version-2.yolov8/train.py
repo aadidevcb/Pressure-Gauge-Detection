@@ -1,23 +1,34 @@
 from ultralytics import YOLO
 import torch
+import os
 
-def train_model():
-    # Verify hardware
-    print(f"Using Device: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'}")
+def train_on_m3():
+    # Verify Apple Silicon GPU availability
+    if not torch.backends.mps.is_available():
+        print("MPS not found. Check your Python/PyTorch version.")
+        return
+    else:
+        print("M3 GPU (MPS) detected. Starting high-performance training...")
 
     # Load the model
-    model = YOLO("yolov8n.pt")
+    # YOLOv8s (small) is a great balance for the M3 16GB
+    model = YOLO('yolov8s.pt') 
 
     # Start training
     model.train(
-        data="data.yaml",
-        epochs=80,
+        data='data.yaml',
+        epochs=100,
         imgsz=640,
-        batch=8,           # Good for your 4GB VRAM
-        pretrained=True,
-        device=0,          # GPU index 0
-        workers=4          # Now safe to use
+        device='mps',           # The secret sauce for Mac M3
+        batch=16,               # Optimized for 16GB Unified Memory
+        workers=8,              # Matches M3 CPU core count
+        cache=True,             # Keep data in RAM to save SSD wear/speed up epochs
+        optimizer='AdamW',      # Superior convergence for many datasets
+        plots=True,             # Generate training curves
+        save=True,
+        project='pressure_gauge_detection',
+        name='needle_v1_m3'
     )
 
 if __name__ == '__main__':
-    train_model()
+    train_on_m3()
